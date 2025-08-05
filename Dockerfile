@@ -1,11 +1,5 @@
-# Use an official Tomcat runtime as a base image
-FROM tomcat:9-jre11
-
-# Copy the WAR file into the webapps directory
-COPY target/addressbook-2.0.war /usr/local/tomcat/webapps/
-
-# Expose the default Tomcat port (8080)
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY target/addressbook-1.0.jar app.jar
 EXPOSE 8080
-
-# Command to run Tomcat
-CMD ["catalina.sh", "run"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
